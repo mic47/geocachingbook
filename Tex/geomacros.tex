@@ -1,0 +1,26 @@
+
+\newcommand\waypointsflush{%
+}
+
+\newcommand\addwaypoint[2]{%
+}
+
+\newcommand\geocache[16]{%
+	\def\geoid{#1}%
+	\def\geolocation{#2}%
+	\def\geoname{#3}%
+	\def\geotype{#4}%
+	\def\geoauthor{#5}%
+	\def\geohidden{#6}%
+	\def\geodifficulty{#7}%
+	\def\geoterrain{#8}%
+	\def\geosize{#9}%
+	\def\geohint{#10}%
+	\def\geokey{#11}%
+	\def\geoshortdesc{#12}%
+	\def\geolongdesc{#13}%
+	\def\geolastfound{#14}%
+	\def\geovisits{#15}%
+	\def\geowaypoints{#16}%
+	\section{\geoid: \geoname}
+}
