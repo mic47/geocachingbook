@@ -4,7 +4,7 @@ all: pdf
 pdf: main.pdf
 
 main.pdf: main.tex *tex caches/*
-	./gen_cache_list
+	./gen-cache-list
 	pdflatex -shell-escape main.tex
 
 clean:

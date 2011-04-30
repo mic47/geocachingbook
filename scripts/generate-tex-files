@@ -1,0 +1,9 @@
+#!/bin/bash
+
+inputDirectory=$1
+outputDirectory=$2
+
+for xml in $inputDirectory/*.xml ; do 
+	outputFile=$outputDirectory/`basename $xml .xml`.tex
+	xsltproc xslt/generateTex.xslt $xml > $outputFile 
+done
