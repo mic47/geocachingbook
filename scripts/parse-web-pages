@@ -1,0 +1,11 @@
+#!/bin/bash
+
+inputDirectory=$1
+outputDirectory=$2
+
+for html in $inputDirectory/*html ; do 
+	cacheID=`xsltproc xslt/getCacheID.xslt --nonet --html $html 2> /dev/null`
+	outputFile=$outputDirectory/$cacheID.xml
+	xsltproc xslt/parseGeocachingCom.xslt --nonet --html $html > $outputFile 2> /dev/null
+	sed -e 's/&#13;//g' -i $outputFile
+done

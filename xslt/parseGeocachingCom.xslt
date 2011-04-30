@@ -7,6 +7,7 @@
 	<code><xsl:value-of select="//span[@class='GCCode']"/></code>
 	<location><xsl:value-of select="//span[@id='ctl00_ContentBody_LatLon']"/></location>
 	<name><xsl:value-of select="//span[@id='ctl00_ContentBody_CacheName']"/></name>
+	<link>http://www.geocaching.com/seek/<xsl:value-of select="//form[@name='aspnetForm' and @id='aspnetForm']/@action"/></link>
 	<type><xsl:value-of select="//td[@class='cacheImage']/a/img/@title"/></type>
 	<author><xsl:value-of select="//td[@class='minorCacheDetails']/span[@class='minorCacheDetails' and substring(normalize-space(text()),1,10)='A cache by']/a"/></author>
 	<hidden><xsl:value-of select="substring-after(normalize-space(//td[@class='minorCacheDetails']/span[@class='minorCacheDetails' and substring(normalize-space(text()),1,8)='Hidden :']),'Hidden : ')"/></hidden>
