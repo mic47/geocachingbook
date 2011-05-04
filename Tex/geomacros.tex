@@ -1,26 +1,132 @@
+\newcommand\geoid{}
+\newcommand\geolocation{}
+\newcommand\geoname{}
+\newcommand\geotype{}
+\newcommand\geoauthor{}
+\newcommand\geohidden{}
+\newcommand\geodifficulty{}
+\newcommand\geoterrain{}
+\newcommand\geosize{}
+\newcommand\geohint{}
+\newcommand\geokey{}
+\newcommand\geoshortdesc{}
+\newcommand\geolongdesc{}
+\newcommand\geolastfound{}
+\newcommand\geovisits{}
+\newcommand\geowaypoints{}
 
-\newcommand\waypointsflush{%
+\newcommand\flushcache{
+	\renewcommand\geoid{}
+	\renewcommand\geolocation{}
+	\renewcommand\geoname{}
+	\renewcommand\geotype{}
+	\renewcommand\geoauthor{}
+	\renewcommand\geohidden{}
+	\renewcommand\geodifficulty{}
+	\renewcommand\geoterrain{}
+	\renewcommand\geosize{}
+	\renewcommand\geohint{}
+	\renewcommand\geokey{}
+	\renewcommand\geoshortdesc{}
+	\renewcommand\geolongdesc{}
+	\renewcommand\geolastfound{}
+	\renewcommand\geovisits{}
+	\renewcommand\geowaypoints{}
 }
 
-\newcommand\addwaypoint[2]{%
+\newcommand\cacheid[1]{
+	\renewcommand\geoid{#1}
 }
 
-\newcommand\geocache[16]{%
-	\def\geoid{#1}%
-	\def\geolocation{#2}%
-	\def\geoname{#3}%
-	\def\geotype{#4}%
-	\def\geoauthor{#5}%
-	\def\geohidden{#6}%
-	\def\geodifficulty{#7}%
-	\def\geoterrain{#8}%
-	\def\geosize{#9}%
-	\def\geohint{#10}%
-	\def\geokey{#11}%
-	\def\geoshortdesc{#12}%
-	\def\geolongdesc{#13}%
-	\def\geolastfound{#14}%
-	\def\geovisits{#15}%
-	\def\geowaypoints{#16}%
-	\section{\geoid: \geoname}
+\newcommand\cachelocation[1]{
+	\renewcommand\geolocation{#1}
 }
+
+\newcommand\cachename[1]{
+	\renewcommand\geoname{#1}
+}
+
+\newcommand\cachetype[1]{
+	\renewcommand\geotype{#1}
+}
+
+\newcommand\cacheauthor[1]{
+	\renewcommand\geoauthor{#1}
+}
+
+\newcommand\cachehidden[1]{
+	\renewcommand\geohidden{#1}
+}
+
+\newcommand\cachedifficulty[1]{
+	\renewcommand\geodifficulty{#1}
+}
+
+\newcommand\cacheterrain[1]{
+	\renewcommand\geoterrain{#1}
+}
+
+\newcommand\cachesize[1]{
+	\renewcommand\geosize{#1}
+}
+
+\newcommand\cachehint[1]{
+	\renewcommand\geohint{#1}
+}
+
+\newcommand\cachekey[1]{
+	\renewcommand\geokey{#1}
+}
+
+\newcommand\cacheshortdesc[1]{
+	\renewcommand\geoshortdesc{#1}
+}
+
+\newcommand\cachelongdesc[1]{
+	\renewcommand\geolongdesc{#1}
+}
+
+\newcommand\cachelastfound[1]{
+	\renewcommand\geolastfound{#1}
+}
+
+\newcommand\cachevisits[1]{
+	\renewcommand\geovisits{#1}
+}
+
+\newcommand\cachewaypoints[2]{
+	\renewcommand\geowaypoints{#1}
+}
+
+
+\newcommand\geocache{
+	{\bf\Large\geoname}
+	{\bf\Large \geoid}
+	\geolocation
+	\geotype
+	\geoauthor
+	\geohidden
+	\geodifficulty
+	\geoterrain
+	\geosize
+	\geohint
+	\geokey
+	\paragraph{} \geoshortdesc
+	\paragraph{} \geolongdesc
+	\geolastfound
+	\geovisits
+	\geowaypoints
+}
+
+\newcommand\htmlbr{\\}
+
+\newcommand\htmlp[1]{\paragraph{} #1\
+\
+\
+}
+
+\newcommand\htmlh[1]{{\Large\sc #1}}
+
+\newcommand\htmla[2]{{#1 #2}}
+
+\newcommand\htmlimg[1]{#1}

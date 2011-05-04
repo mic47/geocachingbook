@@ -1,0 +1,9 @@
+#!/bin/bash
+
+inputDirectory=$1
+out=`tempfile`
+
+for xml in $inputDirectory/*.xml ; do 
+	scripts/change-location-format.py < $xml > $out;
+	cp $out $xml
+done

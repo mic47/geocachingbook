@@ -8,4 +8,4 @@ main.pdf: main.tex *tex caches/*
 	pdflatex -shell-escape main.tex
 
 clean:
-	rm *aux *dvi *log *pdf
+	rm *aux *log *pdf
