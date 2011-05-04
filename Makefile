@@ -2,9 +2,11 @@
 all: Tex/main.pdf
 
 Tex/main.pdf: Web/*html Makefile
-	rm Geocaches/*.xml
+	rm -f Geocaches/*.xml
+	rm -f gpx/*gpx
 	scripts/parse-web-pages Web Geocaches
-	scripts/convert-locations
+	scripts/convert-locations Geocaches
+	scripts/generate-gpx-files Geocaches gpx
 	scripts/generate-tex-files Geocaches Tex/caches
 	cd Tex;	make
 

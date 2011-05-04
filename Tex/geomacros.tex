@@ -100,29 +100,34 @@
 
 
 \newcommand\geocache{
-	{\bf\Large\geoname}
-	{\bf\Large \geoid}
-	\geolocation
-	\geotype
-	\geoauthor
-	\geohidden
-	\geodifficulty
-	\geoterrain
-	\geosize
+	\begin{tabular}{l l}
+	\begin{minipage}[5cm]
+		{\bf\Large\geoid: \geoname}\\
+		Difficulty/Terrain: \geodifficulty/\geoterrain, \geosize size, \geotype \\
+		Location: \geolocation \\
+		Hidden on \geohidden \ by \geoauthor
+	\end{minipage}
+	&
+	\begin{minipage}[1cm]
+	\begin{pspicture}(1in,1in)
+		\psbarcode{http://www.geocaching.com/seek/cache\_details.aspx?wp=\geocode}{height=1 width=1}{qrcode}
+	\end{pspicture}
+	\end{minipage}
+	\end{tabular}
+
+		%\geokey
+	 \geoshortdesc
+	\geolongdesc
 	\geohint
-	\geokey
-	\paragraph{} \geoshortdesc
-	\paragraph{} \geolongdesc
 	\geolastfound
 	\geovisits
 	\geowaypoints
+	\pagebreak
 }
 
 \newcommand\htmlbr{\\}
 
 \newcommand\htmlp[1]{\paragraph{} #1\
-\
-\
 }
 
 \newcommand\htmlh[1]{{\Large\sc #1}}
