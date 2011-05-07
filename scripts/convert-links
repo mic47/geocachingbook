@@ -1,0 +1,12 @@
+#!/bin/bash
+
+inputDirectory=$1
+tool=$2
+
+tmp=`tempfile`
+for i in $1/*html; do
+	rm $tmp
+	cat $i | bash $tool > $tmp
+	cp $tmp $i
+done
+

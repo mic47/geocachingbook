@@ -3,50 +3,70 @@
 <xsl:output method="text" encoding="utf8"/>
 <xsl:template match='/'>
 <xsl:for-each select="//cache">
-\cacheid{<xsl:value-of select="code"/>}
-\cachelocation{<xsl:value-of select="location"/>}
-\cachename{<xsl:apply-templates select="name"/>}
-\cachetype{<xsl:value-of select="type"/>}
-\cacheauthor{<xsl:apply-templates select="author"/>}
-\cachehidden{<xsl:value-of select="hidden"/>}
-\cachedifficulty{<xsl:value-of select="difficulty"/>}
-\cacheterrain{<xsl:value-of select="terrain"/>}
-\cachesize{<xsl:value-of select="size"/>}
-\cachehint{<xsl:apply-templates select="hints"/>}
-\cachekey{<xsl:apply-templates select="hint-key"/>}
-\cacheshortdesc{<xsl:apply-templates select="short-desctiption"/>}
-\cachelongdesc{<xsl:apply-templates select="long-description" />}
-\cachelastfound{<xsl:value-of select="last-visit"/>}
-\cachevisits{<xsl:value-of select="visits"/>}
+\section*{<xsl:apply-templates select="name"/>\hfill <xsl:value-of select="code"/>}
+\addcontentsline{toc}{section}{<xsl:value-of select="code"/>: <xsl:apply-templates select="name"/>}
+Difficulty/Terrain: <xsl:value-of select="difficulty"/>/<xsl:value-of select="terrain"/>, <xsl:value-of select="size"/> size, <xsl:value-of select="type"/>\\ 
+Location: <xsl:apply-templates select="location"/>\\
+Hidden on <xsl:apply-templates select="hidden"/> \ by <xsl:apply-templates select="author"/>. Found <xsl:apply-templates select="visits"/> times (last on <xsl:apply-templates select="last-visit"/>)
+
+<xsl:if test="warning!=''">
+<xsl:apply-templates select="warning"/>
+</xsl:if>
+
+\paragraph{Short description:} <xsl:apply-templates select="short-description"/>
+
+\paragraph{Long description:} <xsl:apply-templates select="long-description" />
+
+\paragraph{Hints:}\ 
+<xsl:apply-templates select='hints'/>
+
+\begin{tabular}{|l|l|}
+\hline
 <xsl:for-each select="waypoint">
-\cachewaypoints{<xsl:apply-templates select="name"/>}{<xsl:apply-templates select="location"/>}
+<xsl:apply-templates select="name"/>&amp;<xsl:apply-templates select="position"/>\\\hline
 </xsl:for-each>
-\geocache
+\end{tabular}
+
+{
+\vbox{
+\paragraph{Notes:}\ \\
+\\
+\\
+\\
+\\
+}}
+
+
+\bigskip
+\hrule
+\bigskip
 </xsl:for-each>
 </xsl:template>
 
-<xsl:template name="html-br" match="br">\htmlbr </xsl:template>
+<xsl:template name="html-br" match="br">\\</xsl:template>
 
-<xsl:template name="html-p" match="p">\htmlp{<xsl:apply-templates/>} <xsl:text>
+<xsl:template name="html-p" match="p"><xsl:apply-templates/>\\</xsl:template>
 
-</xsl:text>
+<xsl:template name="html-a" match="a"> {<xsl:apply-templates select="@href" />}{<xsl:apply-templates />} </xsl:template>
+
+<xsl:template name="html-img" match="img"> 
+\begin{wrapfigure}{l}{0.5\textwidth}
+\includegraphics[width=0.5\textwidth]{../Web/www.geocaching.com/seek/<xsl:apply-templates select="@src" />}
+\end{wrapfigure}
 </xsl:template>
 
-<xsl:template name="html-a" match="a"> \htmla{<xsl:apply-templates select="@href" />}{<xsl:apply-templates />} </xsl:template>
-
-<xsl:template name="html-img" match="img"> \htmlimg{<xsl:apply-templates select="@src" />} </xsl:template>
 
 <xsl:template name="html-ul" match="ul">
-\begin{itemize}
+<!--\begin{itemize}\setlength{\itemsep}{-2mm} -->
 <xsl:apply-templates />
-\end{itemize}
+<!--\end{itemize} -->
 </xsl:template>
 
-<xsl:template name="html-li" match="li">\item <xsl:apply-templates /></xsl:template>
+<xsl:template name="html-li" match="li">$\bullet$ <xsl:apply-templates />\\</xsl:template>
 
-<xsl:template name="html-h1" match="h1 | h2"> \htmlh{<xsl:apply-templates />} </xsl:template>
+<xsl:template name="html-h1" match="h1 | h2"> {\Large\sc <xsl:apply-templates />} </xsl:template>
 
-<xsl:template name="escape" match="text()">
+<xsl:template name="escape" match="text() | @href">
   <!-- 
   per latex tutorial, the following need escaping: # $ % & ~ _ ^ \ { }
   -->
@@ -108,7 +128,7 @@
 
   <xsl:choose>
     <xsl:when test='contains($s, $c)'>
-      <xsl:value-of select='substring-before($s, $c)'/>
+      <xsl:value-of select='normalize-space(substring-before($s, $c))'/>
       <xsl:text>\</xsl:text>
 
       <xsl:choose>
@@ -122,7 +142,7 @@
 
       <xsl:call-template name="esc">
 	<xsl:with-param name='c' select='$c'/>
-	<xsl:with-param name='s' select='substring-after($s, $c)'/>
+	<xsl:with-param name='s' select='normalize-space(substring-after($s, $c))'/>
       </xsl:call-template>
     </xsl:when>
     <xsl:otherwise>

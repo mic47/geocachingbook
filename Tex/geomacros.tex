@@ -95,39 +95,56 @@
 }
 
 \newcommand\cachewaypoints[2]{
-	\renewcommand\geowaypoints{#1}
+	\def\tmp{\geowaypoints}
+	\renewcommand\geowaypoints{\tmp\\hline#1&#2}
 }
 
 
 \newcommand\geocache{
-	\begin{tabular}{l l}
-	\begin{minipage}[5cm]
-		{\bf\Large\geoid: \geoname}\\
-		Difficulty/Terrain: \geodifficulty/\geoterrain, \geosize size, \geotype \\
-		Location: \geolocation \\
-		Hidden on \geohidden \ by \geoauthor
-	\end{minipage}
-	&
-	\begin{minipage}[1cm]
-	\begin{pspicture}(1in,1in)
-		\psbarcode{http://www.geocaching.com/seek/cache\_details.aspx?wp=\geocode}{height=1 width=1}{qrcode}
-	\end{pspicture}
-	\end{minipage}
-	\end{tabular}
+	%\def\geoparboxsize{9cm}
+	%\begin{tabular}{ll}
+%		\parbox{\geoparboxsize}{\bf\Large\geoid: \geoname}
+%		&\multirow{5}{*}{
+%		\begin{pspicture}(1in,1in)
+%			\psbarcode{http://www.geocaching.com/seek/cache\_details.aspx?wp=\geocode}{height=1 width=1}{qrcode}
+%		\end{pspicture}
+%		}\\
+%		\parbox{\geoparboxsize}{
+%		Difficulty/Terrain: \geodifficulty/\geoterrain\\
+%		\geosize size, \geotype\\ 
+%		Location: \geolocation \\
+%		Hidden on \geohidden \ by \geoauthor\\
+%	 	\geoshortdesc\\
+%		}
+%	\end{tabular}
+	{\bf\Large\geoname\hfill\geoid}\\
+	Difficulty/Terrain: \geodifficulty/\geoterrain, \geosize size, \geotype\\ 
+	Location: \geolocation \\
+	Hidden on \geohidden \ by \geoauthor. Found \geovisits \ times (last on \geolastfound)
 
-		%\geokey
-	 \geoshortdesc
-	\geolongdesc
+	\paragraph{Short description:}\geoshortdesc
+
+	\paragraph{Long description:}\geolongdesc
+	
+	\paragraph{Hint:}\ \\
 	\geohint
-	\geolastfound
-	\geovisits
+	\begin{tabular}{|l|l|}
+	\hline
 	\geowaypoints
-	\pagebreak
+	\hline
+	\end{tabular}
+	\bigskip
+	\hrule
+	\bigskip
+	%\vfill
+	%\pagebreak
 }
 
 \newcommand\htmlbr{\\}
 
-\newcommand\htmlp[1]{\paragraph{} #1\
+\newcommand\htmlp[1]{
+%\paragraph{}
+#1\
 }
 
 \newcommand\htmlh[1]{{\Large\sc #1}}

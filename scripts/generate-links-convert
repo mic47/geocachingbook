@@ -1,0 +1,11 @@
+#!/bin/bash
+
+inputDirectory=$1
+
+echo "sed -e 's/%3F/?/g' |"
+echo -n "sed -e '"
+for i in $inputDirectory/*html; do 
+	echo -n 's/href=\"'`basename $i`'\"/href=\"'`xsltproc -novalid -nonet -html xslt/getCacheID.xslt $i`'.html\"/g;'
+	echo -n 's/href=\"http:\/\/www.geocaching.com\/seek\/'`basename $i .html`'\"/href=\"'`xsltproc -novalid -nonet -html xslt/getCacheID.xslt $i`'.html\"/g;'
+done
+echo "' |cat"

@@ -1,18 +1,32 @@
 \documentclass[twoside,fontsize=10pt]{book}
 \usepackage[a5paper]{geometry}
 \usepackage[cm]{fullpage}
-\usepackage{auto-pst-pdf,pst-barcode}
+%\usepackage{auto-pst-pdf,pst-barcode}
 \usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{graphicx}
+
+%define borders
+\topmargin=-2.2cm
+\textheight=20cm
+%\textwidth=13cm
+\footskip=0.5cm
 
 \input geomacros.tex
 
 \begin{document}
+
+\frontmatter
+
+\tableofcontents
 
 \mainmatter
 
 %\input dummy.tex
 
 \input cache_list.tex
+
+\backmatter
 
 \end{document}
 

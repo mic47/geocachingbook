@@ -1,0 +1,30 @@
+#!/bin/bash
+
+outputDirectory=$1
+
+index=$outputDirectory/index.html
+rm -f $index
+
+(
+echo "
+<html>
+<head>
+<title>Geocaching in Waterloo (near UW)</title>
+</head>
+<body>
+<h1>Geocaching in Waterloo (near UW)</h1>
+<ul>
+";
+
+for file in $outputDirectory/*html; do
+	text=`cat $file  | grep h2 | sed -e 's/<[^>]*>//g' | head -n 2`
+	echo "<li>";
+	echo "<a href=\"`basename $file`\">$text</a>";
+	echo "</li>";
+done
+
+echo "
+</ul>
+</body>
+</html>";
+) > $index

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for i in $1/*html; do
+	cat $i |
+	sed -e 's/\(<a\)/\n\1/g' |grep -e 'href="http:' |  sed -e 's/^.*href="http:\([^"]*\)".*$/http:\1/'
+done
+
