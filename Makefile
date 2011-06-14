@@ -11,7 +11,7 @@ linksconvertscript=tempfiles/$(CITY).c.sh
 all:
 
 directories: 
-	mkdir -p Geocaches/$(CITY) Gpx/$(CITY) Html/$(CITY) Web/$(CITY) Tex/$(CITY) tempfiles
+	mkdir -p Geocaches/$(CITY) Gpx/$(CITY) Html/$(CITY) Web/$(CITY) Tex/$(CITY) tempfiles Books
 
 cachelist: directories
 	scripts/generate-file-list $(downloadlist) $(CITY)
@@ -56,7 +56,7 @@ automatic: directories
 	make CITY=$(CITY) mobi
 
 mobi: directories
-	ebook-convert Web/$(CITY)/www.geocaching.com/seek/index.html $(CITY).mobi --output-profile kindle
+	ebook-convert Web/$(CITY)/www.geocaching.com/seek/index.html Books/$(CITY).mobi --output-profile kindle
 
 #tex:
 #	rm -f Tex/caches/*
