@@ -1,9 +1,10 @@
 #!/bin/bash
 
 filelist=$1
+directory=$2
 
 (
-	for i in ListOfCaches/*html ; do 
+	for i in ListOfCaches/$directory/*html ; do 
 		xsltproc -novalid -nonet -html xslt/parseListOfCaches.xslt $i
 	done
 ) > $filelist 2> /dev/null

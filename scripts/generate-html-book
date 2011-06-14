@@ -1,6 +1,8 @@
 #!/bin/bash
 
 outputDirectory=$1
+city=$2
+
 
 index=$outputDirectory/index.html
 rm -f $index
@@ -9,10 +11,10 @@ rm -f $index
 echo "
 <html>
 <head>
-<title>Geocaching in Waterloo (near UW)</title>
+<title>Geocaching in $city</title>
 </head>
 <body>
-<h1>Geocaching in Waterloo (near UW)</h1>
+<h1>Geocaching in $city</h1>
 <ul>
 ";
 
