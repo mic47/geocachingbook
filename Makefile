@@ -55,6 +55,7 @@ automatic: directories
 	make CITY=$(CITY) cachelist
 	make CITY=$(CITY) closure
 	make CITY=$(CITY) htmlheader
+	make CITY=$(CITY) gpx
 	make CITY=$(CITY) mobi
 
 mobi: directories

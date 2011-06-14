@@ -7,8 +7,8 @@ echo -n "sed -e '"
 for i in $inputDirectory/*html; do 
 	cacheID=`xsltproc -novalid -nonet -html xslt/getCacheID.xslt $i | sed -e 's/[^0-9a-zA-Z//g'`;
 	if [ "$cacheID" != "" ]; then
-		echo -n 's/href=\"'`basename $i`'\"/href=\"'`xsltproc -novalid -nonet -html xslt/getCacheID.xslt $i`'.html\"/g;'
-		echo -n 's/href=\"http:\/\/www.geocaching.com\/seek\/'`basename $i .html`'\"/href=\"'`xsltproc -novalid -nonet -html xslt/getCacheID.xslt $i`'.html\"/g;'
+		echo -n 's/href=\"'`basename $i`'\"/href=\"'$cacheID'.html\"/g;'
+		echo -n 's/href=\"http:\/\/www.geocaching.com\/seek\/'`basename $i .html`'\"/href=\"'$cacheID'.html\"/g;'
 	fi
 done
 echo "' |cat"
