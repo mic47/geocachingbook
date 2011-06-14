@@ -10,3 +10,7 @@ Ak chces iba 1 gpx subor na vsetky kesky, pouzi napriklad program gpxprune.
 
 Narocnejsie pouzitie: pozri makefile, hlavne ako funguje closure a automatic, z
 toho by malo byt jasne, ako sa s tymto makefilom pracuje.
+
+Poznamka: budes musiet vyrobit subor cookies.txt kde su kolaciky z tvojho
+browsera s tvojim kontom na geocaching.com. Inac nebudes mat koordinaty (je
+mozne ze sa nejaky skript zdrbe ak tam budu otazniky namiesto koordinatov).
