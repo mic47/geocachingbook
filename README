@@ -1,0 +1,12 @@
+Ako toto pouzit?
+
+Vyhladaj si na geocaching.com nekake kesky. Napriklad podla koordinatu.
+Dostanes sa za zoznam kesiek. Stiahni si kolko stranok z tohto zoznamu chces do
+adresara ListOfCaches/<MESTO>/ kde <MESTO> je string bez medzier. Potom napis
+"make CITY=<MESTO> automatic" a casom ti to vyrobi subor <MESTO>.mobi a tiez
+adresar Gpx/<MESTO>/ kde bude vela gpx suborov (1 subor na kesku).
+
+Ak chces iba 1 gpx subor na vsetky kesky, pouzi napriklad program gpxprune.
+
+Narocnejsie pouzitie: pozri makefile, hlavne ako funguje closure a automatic, z
+toho by malo byt jasne, ako sa s tymto makefilom pracuje.
