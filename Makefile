@@ -5,16 +5,19 @@
 CITY=Toronto
 #CITY=Waterloo #DONE
 
+downloadlist=tempfiles/$(CITY).downloadlist
+linksconvertscript=tempfiles/$(CITY).c.sh
+
 all:
 
 directories: 
-	mkdir -p Geocaches/$(CITY) Gpx/$(CITY) Html/$(CITY) Web/$(CITY) Tex/$(CITY) 
+	mkdir -p Geocaches/$(CITY) Gpx/$(CITY) Html/$(CITY) Web/$(CITY) Tex/$(CITY) tempfiles
 
 cachelist: directories
-	scripts/generate-file-list downloadlist $(CITY)
+	scripts/generate-file-list $(downloadlist) $(CITY)
 
 download: directories
-	scripts/download-web-pages downloadlist $(CITY)
+	scripts/download-web-pages $(downloadlist) $(CITY)
 	mv Web/$(CITY)/www.geocaching.com/seek/cache_details*html Html/$(CITY)
 
 parse: directories
@@ -28,8 +31,8 @@ gpx:  directories
 
 html: directories
 	scripts/generate-html-files Geocaches/$(CITY) Web/$(CITY)/www.geocaching.com/seek
-	scripts/generate-links-convert Html/$(CITY)/ 2> /dev/null > tmp/c.sh
-	scripts/convert-links Web/$(CITY)/www.geocaching.com/seek tmp/c.sh
+	scripts/generate-links-convert Html/$(CITY)/ 2> /dev/null > $(linksconvertscript)
+	scripts/convert-links Web/$(CITY)/www.geocaching.com/seek $(linksconvertscript)
 	#copy header
 
 htmlheader: directories
@@ -39,14 +42,18 @@ outsidelinks: directories
 	scripts/extract-links Web/$(CITY)/www.geocaching.com/seek
 
 closure: directories
-	while [ `cat downloadlist | wc -l` -ne 0 ] ; do  \
-		make download \
-		make parse \
-		make html \
-		make outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' > downloadlist \
+	while [ `cat $(downloadlist) | wc -l` -ne 0 ] ; do  \
+		make CITY=$(CITY) download  \
+		make CITY=$(CITY) parse \
+		make CITY=$(CITY) html \
+		make CITY=$(CITY) outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' > $(downloadlist) \
 	done
 
-
+automatic: directories
+	make CITY=$(CITY) cachelist
+	make CITY=$(CITY) closure
+	make CITY=$(CITY) htmlheader
+	make CITY=$(CITY) mobi
 
 mobi: directories
 	ebook-convert Web/$(CITY)/www.geocaching.com/seek/index.html $(CITY).mobi --output-profile kindle
