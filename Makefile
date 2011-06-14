@@ -43,10 +43,10 @@ outsidelinks: directories
 
 closure: directories
 	while [ `cat $(downloadlist) | wc -l` -ne 0 ] ; do  \
-		make CITY=$(CITY) download  \
-		make CITY=$(CITY) parse \
-		make CITY=$(CITY) html \
-		make CITY=$(CITY) outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' > $(downloadlist) \
+		make CITY=$(CITY) download ; \
+		make CITY=$(CITY) parse ; \
+		make CITY=$(CITY) html ; \
+		make CITY=$(CITY) outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' > $(downloadlist) ; \
 	done
 
 automatic: directories
