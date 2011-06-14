@@ -4,3 +4,5 @@ filelist=$1
 directory=$2
 
 wget --no-clobber -E -H -p -k -P Web/$directory/ --load-cookies cookies.txt --random-wait `cat $filelist`
+
+return 0;

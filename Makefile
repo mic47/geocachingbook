@@ -38,6 +38,15 @@ htmlheader: directories
 outsidelinks: directories
 	scripts/extract-links Web/$(CITY)/www.geocaching.com/seek
 
+closure: directories
+	while [ `cat downloadlist | wc -l` -ne 0 ] ; do  \
+		make download \
+		make parse \
+		make html \
+		make outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' > downloadlist \
+	done
+
+
 
 mobi: directories
 	ebook-convert Web/$(CITY)/www.geocaching.com/seek/index.html $(CITY).mobi --output-profile kindle
