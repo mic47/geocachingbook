@@ -42,11 +42,13 @@ outsidelinks: directories
 	scripts/extract-links Web/$(CITY)/www.geocaching.com/seek
 
 closure: directories
-	while [ `cat $(downloadlist) | wc -l` -ne 0 ] ; do  \
+	echo > $(downloadlist).old ; \
+	while [ "`diff -q $(downloadlist) $(downloadlist).old`" != "" ] ; do  \
 		make CITY=$(CITY) download ; \
 		make CITY=$(CITY) parse ; \
 		make CITY=$(CITY) html ; \
-		make CITY=$(CITY) outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' > $(downloadlist) ; \
+		cp $(downloadlist) $(downloadlist).old ;\
+		make CITY=$(CITY) outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' | sort -u > $(downloadlist) ; \
 	done
 
 automatic: directories
