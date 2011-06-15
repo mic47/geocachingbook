@@ -6,6 +6,7 @@ CITY=Toronto
 #CITY=Waterloo #DONE
 
 downloadlist=tempfiles/$(CITY).downloadlist
+downloadedlist=tempfiles/$(CITY).downloadedlist
 linksconvertscript=tempfiles/$(CITY).c.sh
 
 all:
@@ -42,13 +43,16 @@ outsidelinks: directories
 	scripts/extract-links Web/$(CITY)/www.geocaching.com/seek
 
 closure: directories
-	echo > $(downloadlist).old ; \
-	while [ "`diff -q $(downloadlist) $(downloadlist).old`" != "" ] ; do  \
+	echo > $(downloadedlist).old ; \
+	cat $(downloadlist) > $(downloadedlist) ; \
+	while [ "`diff -q $(downloadedlist) $(downloadedlist).old`" != "" ] ; do  \
 		make CITY=$(CITY) download ; \
 		make CITY=$(CITY) parse ; \
 		make CITY=$(CITY) html ; \
-		cp $(downloadlist) $(downloadlist).old ;\
 		make CITY=$(CITY) outsidelinks | grep 'http://www.geocaching.com/seek/cache_details.aspx' | sort -u > $(downloadlist) ; \
+		cp $(downloadedlist) $(downloadedlist).old ;\
+		cat $(downloadedlist) $(downloadlist) | sort -u > tempfiles/$(CITY).templist ;\
+		cp tempfiles/$(CITY).templist $(downloadedlist); \
 	done
 
 automatic: directories
