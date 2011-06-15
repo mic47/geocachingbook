@@ -18,7 +18,7 @@
 
 	<terrain><xsl:value-of select="substring-before(//span[@id='ctl00_ContentBody_Localize6']/img/@alt,' out of')"/></terrain>
 	<size><xsl:value-of select="substring-after(substring-before(//span[@class='minorCacheDetails']/img[substring-before(@alt,':')='Size']/../small,')'),'(')"/></size>
-	<hints><xsl:copy-of select="//div[@id='div_hint' and @class='HalfLeft']"/></hints>
+	<hints><xsl:copy-of select="//div[@id='div_hint']"/></hints>
 	<hint-key><xsl:value-of select="//div[@class='DecryptionKeyWidget']/p[@class='WidgetBody']"/></hint-key>
 	<short-description><xsl:copy-of select="//span[@id='ctl00_ContentBody_ShortDescription']"/></short-description>
 	<long-description><xsl:copy-of select="//span[@id='ctl00_ContentBody_LongDescription']"/></long-description>
