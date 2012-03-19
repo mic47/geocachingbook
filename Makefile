@@ -23,7 +23,7 @@ download: directories
 
 parse: directories
 	rm -rf Geocaches/$(CITY)/*.xml
-	scripts/parse-web-pages Html/$(CITY)/ Geocaches/$(CITY)/
+	scripts/parse-web-pages Html/$(CITY) Geocaches/$(CITY)
 	scripts/convert-locations Geocaches/$(CITY)
 
 gpx:  directories

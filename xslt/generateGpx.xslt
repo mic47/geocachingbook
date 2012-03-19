@@ -13,8 +13,8 @@
 			<xsl:value-of select='substring-after(location," ")'/>
 		</xsl:attribute>
 		<name><xsl:value-of select="code"/></name>
-		<cmt><xsl:value-of select="name"/></cmt>
-		<desc><xsl:value-of select="name"/></desc>
+		<cmt>D/T: <xsl:value-of select="difficulty"/>/<xsl:value-of select="terrain"/>, <xsl:value-of select="size"/> size. <xsl:value-of select="name"/></cmt>
+		<desc>D/T: <xsl:value-of select="difficulty"/>/<xsl:value-of select="terrain"/>, <xsl:value-of select="size"/> size. <xsl:value-of select="name"/></desc>
 		<sym>Geocache</sym>
 		<type>Geocache</type>
 	</wpt>

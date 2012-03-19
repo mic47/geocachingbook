@@ -3,6 +3,6 @@
 filelist=$1
 directory=$2
 
-wget --no-clobber -E -H -p -k -P Web/$directory/ --load-cookies cookies.txt --random-wait --tries=3 `cat $filelist`
+wget --no-clobber -E -H -p -k -P Web/$directory/ --load-cookies cookies.txt --random-wait --timeout=5 --tries=3 `cat $filelist`
 
 ls > /dev/null #we want to return 0

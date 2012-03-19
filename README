@@ -14,3 +14,6 @@ toho by malo byt jasne, ako sa s tymto makefilom pracuje.
 Poznamka: budes musiet vyrobit subor cookies.txt kde su kolaciky z tvojho
 browsera s tvojim kontom na geocaching.com. Inac nebudes mat koordinaty (je
 mozne ze sa nejaky skript zdrbe ak tam budu otazniky namiesto koordinatov).
+
+ gpsbabel -i gpx -f "Gpx/bratislava.gpx" -o garmin_gpi,category="Geocache",bitmap=bitmaps/traditional_72.bmp,notes -F "bratislava.gpi"
+ --TOTO by malo generovat automaticky, zaroven pouzivat rozne ikonky pre rozne typy kesiek

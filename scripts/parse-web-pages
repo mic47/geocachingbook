@@ -3,9 +3,14 @@
 inputDirectory=$1
 outputDirectory=$2
 
+echo $inputDirectory
+
 for html in $inputDirectory/cache* ; do 
-	cacheID=`xsltproc xslt/getCacheID.xslt --nonet --html $html 2> /dev/null`
+	cacheID=`xsltproc --nonet --html xslt/getCacheID.xslt  $html 2> /dev/null`
 	outputFile=$outputDirectory/$cacheID.xml
-	xsltproc xslt/parseGeocachingCom.xslt --nonet --html $html > $outputFile 2> /dev/null
+	echo $html
+	echo $cacheID
+	echo $outputFile
+	xsltproc --nonet --html xslt/parseGeocachingCom.xslt $html > $outputFile 2> /dev/null
 	sed -e 's/&#13;//g' -i $outputFile
 done
