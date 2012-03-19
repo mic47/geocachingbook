@@ -1,0 +1,33 @@
+#!/bin/bash
+
+listDirectory=$1
+inputDirectory=$2
+outputDirectory=$3
+imageDirectory=$4
+
+city=$5
+
+rm -rf $outputDirectory
+mkdir -p $outputDirectory
+
+for xml in $listDirectory/*.xml ; do 
+	inputFile=$inputDirectory/`basename $xml .xml`.gpx
+	cacheType=`xsltproc --novalid --nonet --novalid xslt/getCacheType.xslt $xml | sed -e 's/[ \t]*//g'`
+	outputFile="$outputDirectory/$cacheType.tmp"
+	cat $inputFile  | head -n -1 | tail -n +4  >> $outputFile 
+done
+
+for xml in $outputDirectory/*.tmp; do
+	baseName=`basename $xml .tmp`
+	inputFile=$outputDirectory/$city-$baseName.gpx
+	outputFile=$outputDirectory/$city-$baseName.gpi
+	(
+		echo '<?xml version="1.0" encoding="UTF-8"?>
+		<gpx creator="Mic47" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:groundspeak="http://www.groundspeak.com/cache/1/1">
+		<metadata/>'
+		cat $xml
+		echo "</gpx>"
+	) > $inputFile
+	rm $xml
+ 	gpsbabel -i gpx -f "$inputFile" -o garmin_gpi,category="Geocache",bitmap=$imageDirectory/$baseName.bmp,notes -F "$outputFile"
+done

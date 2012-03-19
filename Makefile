@@ -30,6 +30,10 @@ gpx:  directories
 	rm -f Gpx/$(CITY)/*
 	scripts/generate-gpx-files Geocaches/$(CITY) Gpx/$(CITY)
 
+poi:  directories
+	rm -f Poi/$(CITY)/*
+	scripts/generate-poi-files Geocaches/$(CITY) Gpx/$(CITY) Poi/$(CITY) Bitmaps $(CITY)
+
 html: directories
 	scripts/generate-html-files Geocaches/$(CITY) Web/$(CITY)/www.geocaching.com/seek
 	scripts/generate-links-convert Html/$(CITY)/ 2> /dev/null > $(linksconvertscript)
@@ -60,6 +64,7 @@ automatic: directories
 	make CITY=$(CITY) closure
 	make CITY=$(CITY) htmlheader
 	make CITY=$(CITY) gpx
+	make CITY=$(CITY) poi
 	make CITY=$(CITY) mobi
 
 mobi: directories
