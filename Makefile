@@ -31,7 +31,7 @@ gpx:  directories
 	scripts/generate-gpx-files Geocaches/$(CITY) Gpx/$(CITY)
 
 poi:  directories
-	rm -f Poi/$(CITY)/*
+	rm -rf Poi/$(CITY)/*
 	scripts/generate-poi-files Geocaches/$(CITY) Gpx/$(CITY) Poi/$(CITY) Bitmaps $(CITY)
 
 html: directories
